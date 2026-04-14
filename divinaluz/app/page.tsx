@@ -1,0 +1,558 @@
+"use client";
+import React, { useState } from "react";
+import { CheckCircle2, ShieldCheck, Heart, Map, Clock, Rocket, PlusCircle, Check, Star, ChevronDown, MessageCircle, MapPin, Phone, Mail, Send, Menu, X } from "lucide-react";
+import styles from "./page.module.css";
+
+export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Hydration fix: Only render the full UI after mounting on the client
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div style={{ backgroundColor: '#FAF9F7', minHeight: '100vh' }} />;
+  }
+
+  return (
+    <div className={styles.pageContainer} suppressHydrationWarning>
+      {/* Header */}
+      <header className={styles.header}>
+        <div className={styles.headerInner}>
+          {/* Logo */}
+          <div className={styles.logoContainer}>
+            <div className={styles.logoText}>
+              <span className={styles.logoBrand}>
+                DIVINA<span>LUZ</span>
+              </span>
+              <span className={styles.logoSubtitle}>
+                Assistência Familiar
+              </span>
+            </div>
+          </div>
+          
+          {/* Desktop Nav */}
+          <nav className={styles.desktopNav}>
+            {['Benefícios', 'Planos', 'Sobre Nós', 'Contato'].map((item) => (
+              <a key={item} href={`#${item.toLowerCase().replace(' ', '-')}`} className={styles.navLink}>
+                {item}
+              </a>
+            ))}
+          </nav>
+
+          {/* CTA */}
+          <div className={styles.ctaContainer}>
+            <button className={styles.headerCta}>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            </button>
+            <div className={styles.mobileActions}>
+              <button className={styles.mobileMenuBtn} onClick={() => setMenuOpen(!menuOpen)}>
+                {menuOpen ? <X /> : <Menu />}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Nav Overlay */}
+        {menuOpen && (
+          <div className={styles.mobileNavOverlay}>
+            <nav className={styles.mobileNav}>
+              {['Benefícios', 'Planos', 'Sobre Nós', 'Contato'].map((item) => (
+                <a 
+                   key={item} 
+                   href={`#${item.toLowerCase().replace(' ', '-')}`} 
+                   className={styles.mobileNavLink}
+                   onClick={() => setMenuOpen(false)}
+                >
+                  {item}
+                </a>
+              ))}
+            </nav>
+          </div>
+        )}
+      </header>
+
+      {/* Hero Section */}
+      <section className={styles.hero}>
+        <div className={styles.heroBg}></div>
+        <div className={styles.heroInner}>
+          <div className={styles.heroContent}>
+            {/* Badge */}
+            <div className={styles.badge}>
+              <ShieldCheck className="w-4 h-4 text-[#1A4D8F]" />
+              <span className={styles.badgeText}>
+                Selo de Qualidade ABREDIF
+              </span>
+            </div>
+
+            {/* Headline */}
+            <h1 className={styles.heroTitle}>
+              Agora Jaraguá pode escolher o melhor para sua família
+            </h1>
+
+            {/* Subheadline */}
+            <p className={styles.heroText}>
+              A população pediu, e a Divina Luz chegou para oferecer o atendimento que
+Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cada história merece ser honrada com respeito, dignidade e cuidado.
+            </p>
+
+            {/* Buttons */}
+            <div className={styles.heroButtons}>
+              <button className={`${styles.btn} ${styles.btnPrimary}`}>
+                <Rocket className="w-5 h-5 mr-3 hidden sm:block" />
+                Falar com Consultor
+              </button>
+              <button className={`${styles.btn} ${styles.btnSecondary}`}>
+                Ver Planos e Valores
+              </button>
+            </div>
+
+
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Indicators (Moved Below Hero) */}
+      <div className={styles.trustBanner}>
+        <div className={styles.trustIndicators}>
+          <div className={styles.trustItem}>
+            <div className={styles.trustIcon}>
+              <Clock className="w-6 h-6" />
+            </div>
+            <div className={styles.trustText}>
+              <span className={styles.trustTextBold}>Suporte 24h</span>
+              <span className={styles.trustTextLight}>Pronto Atendimento</span>
+            </div>
+          </div>
+          
+          <div className={styles.trustItem}>
+            <div className={styles.trustIcon}>
+              <ShieldCheck className="w-6 h-6" />
+            </div>
+            <div className={styles.trustText}>
+              <span className={styles.trustTextBold}>30 Anos</span>
+              <span className={styles.trustTextLight}>Experiência e Tradição</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Pricing Section */}
+      <section id="planos" className={styles.section} style={{ backgroundColor: '#F2F4F7' }}>
+        <div className={styles.sectionInner}>
+          <div className={styles.sectionCenter}>
+            <h2 className={styles.sectionTitle}>
+              Planos para Sua Família
+            </h2>
+            <p className={styles.sectionSubtitle}>
+              Planos flexíveis que cabem no seu orçamento.
+            </p>
+          </div>
+
+          <div className={styles.grid4}>
+            {/* POP */}
+            <div className={styles.planCard}>
+              <h3 className={styles.planTitle}>POP</h3>
+              <p className={styles.planSubtitle}>Cuidado essencial e sensibilidade.</p>
+              <div className={styles.planPriceBox}>
+                <span className={styles.planCurrency}>R$</span>
+                <span className={styles.planPrice}>44,40</span>
+                <span className={styles.planPeriod}>/mês</span>
+              </div>
+              <ul className={styles.planList}>
+                {[
+                  'S.A.F (Atendimento Funerário)',
+                  'Traslado com limite de Km',
+                  'Ornamentação flores naturais',
+                  'Kit lanche e Vestimentas'
+                ].map((li, i) => (
+                  <li key={i} className={styles.planListItem}>
+                    <CheckCircle2 className={styles.planListItemIcon} />
+                    <span className={styles.planListText}>{li}</span>
+                  </li>
+                ))}
+              </ul>
+              <button className={styles.btnPlan}>
+                Quero saber mais
+              </button>
+            </div>
+
+            {/* VIP */}
+            <div className={styles.planCard}>
+              <h3 className={styles.planTitle}>VIP</h3>
+              <p className={styles.planSubtitle}>Despedidas feitas com carinho.</p>
+              <div className={styles.planPriceBox}>
+                <span className={styles.planCurrency}>R$</span>
+                <span className={styles.planPrice}>74,00</span>
+                <span className={styles.planPeriod}>/mês</span>
+              </div>
+              <ul className={styles.planList}>
+                <li className={styles.planListItem}>
+                  <PlusCircle className={styles.planListItemIcon} />
+                  <span className={styles.planListTextBold}>Tudo do plano POP +</span>
+                </li>
+                {[
+                  'Traslado sem limite (GO e DF)',
+                  'Sala de homenagem póstuma'
+                ].map((li, i) => (
+                  <li key={i} className={styles.planListItem}>
+                    <CheckCircle2 className={styles.planListItemIcon} />
+                    <span className={styles.planListText}>{li}</span>
+                  </li>
+                ))}
+              </ul>
+              <button className={styles.btnPlan}>
+                Quero saber mais
+              </button>
+            </div>
+
+            {/* MASTER */}
+            <div className={styles.planCardMaster}>
+              <div className={styles.masterBadge}>
+                Mais Escolhido
+              </div>
+              <h3 className={styles.planTitleMaster}>MASTER</h3>
+              <p className={styles.planSubtitleMaster}>Proteção e amparo em cada fase.</p>
+              <div className={styles.planPriceBox}>
+                <span className={styles.planCurrencyMaster}>R$</span>
+                <span className={styles.planPriceMaster}>111,20</span>
+                <span className={styles.planPeriodMaster}>/mês</span>
+              </div>
+              <ul className={styles.planList}>
+                <li className={styles.planListItem}>
+                  <PlusCircle className={styles.planListItemIconMaster} />
+                  <span className={styles.planListTextMaster} style={{fontWeight: 700}}>Tudo do plano VIP +</span>
+                </li>
+                {[
+                  'Tanatopraxia/Embalsamamento',
+                  'Coroa de Flores',
+                  'Chuva de Pétalas'
+                ].map((li, i) => (
+                  <li key={i} className={styles.planListItem}>
+                    <CheckCircle2 className={styles.planListItemIconMaster} />
+                    <span className={styles.planListTextMaster}>{li}</span>
+                  </li>
+                ))}
+              </ul>
+              <button className={styles.btnPlanMaster}>
+                Quero saber mais
+              </button>
+            </div>
+
+            {/* PREMIUM */}
+            <div className={styles.planCard}>
+              <h3 className={styles.planTitle}>PREMIUM</h3>
+              <p className={styles.planSubtitle}>Cada detalhe com amor e dignidade.</p>
+              <div className={styles.planPriceBox}>
+                <span className={styles.planCurrency}>R$</span>
+                <span className={styles.planPrice}>201,30</span>
+                <span className={styles.planPeriod}>/mês</span>
+              </div>
+              <ul className={styles.planList}>
+                <li className={styles.planListItem}>
+                  <PlusCircle className={styles.planListItemIcon} />
+                  <span className={styles.planListTextBold}>Tudo do MASTER +</span>
+                </li>
+                {[
+                  'Cremação e Cobertura Nacional',
+                  'Pet Assistência & Residencial',
+                  'Assist. Psicoterapêutica',
+                  'Seguro AUX (Titular)'
+                ].map((li, i) => (
+                  <li key={i} className={styles.planListItem}>
+                    <CheckCircle2 className={styles.planListItemIcon} />
+                    <span className={styles.planListText}>{li}</span>
+                  </li>
+                ))}
+              </ul>
+              <button className={styles.btnPlan}>
+                Quero saber mais
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section id="beneficios" className={styles.section}>
+        <div className={styles.sectionInner}>
+          <div className={styles.sectionCenter}>
+            <h3 className={styles.sectionSuperTitle}>
+              Por que nos escolher
+            </h3>
+            <h2 className={styles.sectionTitle}>
+              Amparo Completo para Sua Família
+            </h2>
+          </div>
+
+          <div className={styles.grid4}>
+            {[
+              { title: 'Atendimento Humanizado', text: 'Nossa equipe é treinada para oferecer acolhimento e empatia acima de tudo.', icon: Heart },
+              { title: 'Cobertura Nacional', text: 'Assistência em todo o território brasileiro, garantindo segurança onde você estiver.', icon: Map },
+              { title: 'Rede de Benefícios', text: 'Descontos exclusivos em farmácias, clínicas e diversos parceiros locais.', icon: CheckCircle2 },
+              { title: 'Suporte 24/7', text: 'Central de atendimento especializada disponível a qualquer hora do dia ou da noite.', icon: Clock },
+            ].map((item, i) => (
+              <div key={i} className={styles.benefitCard}>
+                <div className={styles.benefitIconWrap}>
+                  <item.icon className="w-6 h-6" />
+                </div>
+                <h4 className={styles.benefitTitle}>{item.title}</h4>
+                <p className={styles.benefitText}>
+                  {item.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How it Works Section */}
+      <section className={styles.section} style={{ backgroundColor: '#ffffffff', padding: '20px'}}>
+        <div className={styles.sectionInner}>
+          <div className={styles.howItWorksGrid}>
+            <div>
+              <h2 className={styles.sectionTitle} style={{ marginBottom: '3rem' }}>
+                Simples e Rápido:<br />
+                Como Garantir Sua Proteção
+              </h2>
+              
+              <div className={styles.stepsList}>
+                {[
+                  { n: '1', t: 'Entre em contato', p: 'Fale com nossos consultores via WhatsApp ou telefone para tirar suas dúvidas.' },
+                  { n: '2', t: 'Escolha seu plano', p: 'Selecione as coberturas que melhor atendem as necessidades da sua família.' },
+                  { n: '3', t: 'Família protegida', p: 'Pronto! Agora você tem a tranquilidade de saber que sua família está amparada.' }
+                ].map((step, i) => (
+                  <div key={i} className={styles.stepItem}>
+                    <div className={styles.stepNumber}>
+                      {step.n}
+                    </div>
+                    <div>
+                      <h4 className={styles.stepTitle}>{step.t}</h4>
+                      <p className={styles.stepText}>
+                        {step.p}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className={styles.illustrationArea}>
+               <div className={styles.illustrationInner}>
+                 <p style={{ color: '#0D3059', fontWeight: 700, fontSize: '18px' }}>Ilustração de Atendimento</p>
+                 <p style={{ fontSize: '14px', color: '#4b5563' }}>Homem e mulher sentados conversando.</p>
+               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className={styles.section} style={{ padding: '5rem 0', backgroundColor: '#F4F3F1' }}>
+        <div className={styles.statsWrap}>
+          <div className={styles.statsGrid}>
+            <div className={styles.statItem}>
+              <div className={styles.statNumber}>30+</div>
+              <div className={styles.statLabel}>Anos de História</div>
+            </div>
+            <div className={styles.statItem}>
+              <div className={styles.statNumber}>15k<span>+</span></div>
+              <div className={styles.statLabel}>Famílias Amparadas</div>
+            </div>
+            <div className={styles.statItem}>
+              <div className={styles.statNumber}>24h</div>
+              <div className={styles.statLabel}>Suporte Ativo</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Feedbacks */}
+      <section className={styles.section} style={{ backgroundColor: '#FAF9F7' }}>
+        <div className={styles.sectionInner}>
+          <div className={styles.grid3}>
+            {[
+              { text: '"Fomos atendidos com muita agilidade. No momento da perda, a última coisa que você quer é burocracia. A Divina Luz resolveu tudo."', author: 'Maria Helena Silva' },
+              { text: '"O plano familiar deles é excelente. Meus pais estão cobertos e os descontos em medicamentos já pagam a mensalidade."', author: 'Ricardo Oliveira' },
+              { text: '"Empresa muito séria. Transparência total nos planos e o atendimento 24h funciona de verdade quando precisamos."', author: 'Ana Paula Santos' }
+            ].map((feedback, i) => (
+              <div key={i} className={styles.feedbackCard}>
+                <div className={styles.feedbackStars}>
+                  {[1,2,3,4,5].map(star => <Star key={star} />)}
+                </div>
+                <p className={styles.feedbackText}>
+                  {feedback.text}
+                </p>
+                <p className={styles.feedbackAuthor}>{feedback.author}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className={styles.section} style={{ backgroundColor: '#FAF9F7', paddingTop: '2rem' }}>
+        <div className={styles.faqMax}>
+          <h2 className={styles.faqTitle}>
+            Perguntas Frequentes
+          </h2>
+          <div className={styles.faqList}>
+            <div className={styles.faqItem}>
+              <div className={styles.faqHeader}>
+                <span>Qual a área de cobertura dos planos?</span>
+                <ChevronDown style={{ transform: 'rotate(180deg)' }} />
+              </div>
+              <p className={styles.faqBody}>
+                Nossa assistência funeral tem cobertura em todo o território nacional. Independente de onde o associado esteja, prestamos todo o suporte necessário através da nossa rede credenciada.
+              </p>
+            </div>
+            <div className={styles.faqItem}>
+              <div className={styles.faqHeader}>
+                <span>Quantas pessoas posso incluir no plano familiar?</span>
+                <ChevronDown />
+              </div>
+            </div>
+            <div className={styles.faqItem}>
+              <div className={styles.faqHeader}>
+                <span>Como funciona o atendimento 24 horas?</span>
+                <ChevronDown />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className={styles.ctaWrap}>
+        <div className={styles.ctaBg}></div>
+        <div className={styles.section} style={{ padding: '6rem 0' }}>
+          <div className={styles.ctaInner}>
+            <h2 className={styles.ctaTitle}>
+              Proteja quem você ama hoje mesmo
+            </h2>
+            <p className={styles.ctaText}>
+              Não deixe para amanhã a segurança de quem você mais valoriza. Fale com um de nossos especialistas agora.
+            </p>
+            <button className={styles.ctaBtn}>
+              <MessageCircle style={{ marginRight: '12px' }} />
+              Chamar no WhatsApp
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Maps */}
+      <section className={styles.mapWrap}>
+        <div className={styles.mapPh}>
+          MAPA INTERATIVO
+        </div>
+        
+        <div className={styles.mapCard}>
+          <div className={styles.mapCardHeader}>
+            <MapPin /> Onde Estamos
+          </div>
+          <h4 className={styles.mapCardTitle}>Jaraguá - GO</h4>
+          <p className={styles.mapCardText}>
+            Nossa sede está localizada no coração de Jaraguá, pronta para oferecer o melhor suporte para você e sua família.
+          </p>
+          <div className={styles.mapPlantao}>
+            Plantão 24 Horas
+          </div>
+          <div className={styles.mapPhone}>
+            0800 123 4567
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className={styles.footer}>
+         <div className={styles.sectionInner}>
+           <div className={styles.grid4} style={{ marginBottom: '4rem' }}>
+             
+             {/* Logo Col */}
+             <div>
+               <div className={styles.logoText} style={{ marginBottom: '2rem' }}>
+                 <span className={styles.logoBrand}>
+                   DIVINA<span>LUZ</span>
+                 </span>
+                 <span className={styles.logoSubtitle}>
+                   Assistência Familiar
+                 </span>
+               </div>
+               <p className={styles.footerText}>
+                 Assistência Familiar e Amparo. Tradição e respeito cuidando da sua família há mais de três décadas.
+               </p>
+               <div className={styles.footerSocials}>
+                 <div className={styles.footerSocialIcon}><ShieldCheck /></div>
+                 <div className={styles.footerSocialIcon}><Star /></div>
+               </div>
+             </div>
+
+             {/* Links Rápidos */}
+             <div>
+               <h4 className={styles.footerTitle}>Links Rápidos</h4>
+               <ul className={styles.footerLinks}>
+                 {['Políticas de Privacidade', 'Termos de Uso', 'Unidades de Atendimento', 'Trabalhe Conosco'].map(link => (
+                   <li key={link}>
+                     <a href="#" className={styles.footerLink}>
+                       {link}
+                     </a>
+                   </li>
+                 ))}
+               </ul>
+             </div>
+
+             {/* Contato */}
+             <div>
+               <h4 className={styles.footerTitle}>Contato</h4>
+               <ul className={styles.footerContactList}>
+                 <li className={styles.footerContactItem}>
+                   <Phone className={styles.footerContactIcon} />
+                   0800 565 2000
+                 </li>
+                 <li className={styles.footerContactItem}>
+                   <Mail className={styles.footerContactIcon} />
+                   contato@divinaluz.com.br
+                 </li>
+                 <li className={`${styles.footerContactItem} ${styles.itemsStart}`}>
+                   <MapPin className={styles.footerContactIconTop} />
+                   Av. Central, 1000 - Centro
+                 </li>
+               </ul>
+             </div>
+
+             {/* Associe-se */}
+             <div>
+               <h4 className={styles.footerTitle}>Associe-se</h4>
+               <p className={styles.footerText} style={{ marginBottom: '1.5rem' }}>
+                 Receba novidades e dicas sobre planejamento familiar.
+               </p>
+               <div className={styles.newsletterForm}>
+                 <input 
+                   type="email" 
+                   placeholder="Seu e-mail" 
+                   className={styles.newsInput}
+                 />
+                 <button className={styles.newsBtn}>
+                   <Send style={{ width: '18px', height: '18px' }} />
+                 </button>
+               </div>
+             </div>
+           </div>
+           
+           <div className={styles.footerBottom}>
+             <div className={styles.footerCopy}>
+               &copy; 2024 Divina Luz. Assistência Familiar e Amparo. Todos os direitos reservados.
+             </div>
+             <button className={styles.footerUp}>
+               <ChevronDown style={{ transform: 'rotate(180deg)', width: '16px', height: '16px' }} />
+             </button>
+           </div>
+         </div>
+      </footer>
+    </div>
+  );
+}
