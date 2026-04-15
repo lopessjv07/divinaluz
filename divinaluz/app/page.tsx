@@ -6,6 +6,30 @@ import styles from "./page.module.css";
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [activeFaq, setActiveFaq] = useState<number | null>(0);
+
+  const faqData = [
+    {
+      question: "Qual a área de cobertura dos planos?",
+      answer: "Nossa assistência funeral tem cobertura em todo o território nacional. Independente de onde o associado esteja, prestamos todo o suporte necessário através da nossa rede credenciada."
+    },
+    {
+      question: "Quantas pessoas posso incluir no plano familiar?",
+      answer: "Nossos planos são flexíveis. No plano padrão, você pode incluir o titular, cônjuge, filhos solteiros até 21 anos e pais/sogros. Também oferecemos opções para dependentes extras conforme sua necessidade."
+    },
+    {
+      question: "Como funciona o atendimento 24 horas?",
+      answer: "Temos uma central de atendimento disponível 24 horas por dia, 7 dias por semana. Em caso de necessidade, basta ligar para o nosso 0800 e um consultor especializado dará todo o suporte imediato, coordenando os serviços necessários."
+    },
+    {
+      question: "Existe carência para os serviços?",
+      answer: "Sim, existe um período de carência padrão conforme as normas da ABREDIF, mas oferecemos condições especiais dependendo da modalidade de contratação. Fale com um de nossos consultores para detalhes sobre o seu perfil."
+    }
+  ];
+
+  const toggleFaq = (index: number) => {
+    setActiveFaq(activeFaq === index ? null : index);
+  };
 
   // Hydration fix: Only render the full UI after mounting on the client
   React.useEffect(() => {
@@ -276,6 +300,29 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
         </div>
       </section>
 
+      {/* Feedbacks */}
+      <section className={styles.section} style={{ backgroundColor: '#FAF9F7' }}>
+        <div className={styles.sectionInner}>
+          <div className={styles.grid3}>
+            {[
+              { text: '"Fomos atendidos com muita agilidade. No momento da perda, a última coisa que você quer é burocracia. A Divina Luz resolveu tudo."', author: 'Maria Helena Silva' },
+              { text: '"O plano familiar deles é excelente. Meus pais estão cobertos e os descontos em medicamentos já pagam a mensalidade."', author: 'Ricardo Oliveira' },
+              { text: '"Empresa muito séria. Transparência total nos planos e o atendimento 24h funciona de verdade quando precisamos."', author: 'Ana Paula Santos' }
+            ].map((feedback, i) => (
+              <div key={i} className={styles.feedbackCard}>
+                <div className={styles.feedbackStars}>
+                  {[1,2,3,4,5].map(star => <Star key={star} />)}
+                </div>
+                <p className={styles.feedbackText}>
+                  {feedback.text}
+                </p>
+                <p className={styles.feedbackAuthor}>{feedback.author}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Benefits Section */}
       <section id="beneficios" className={styles.section}>
         <div className={styles.sectionInner}>
@@ -314,11 +361,11 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
         <div className={styles.sectionInner}>
           <div className={styles.howItWorksGrid}>
             <div>
+              <br />
               <h2 className={styles.sectionTitle} style={{ marginBottom: '3rem' }}>
                 Simples e Rápido:<br />
                 Como Garantir Sua Proteção
               </h2>
-              
               <div className={styles.stepsList}>
                 {[
                   { n: '1', t: 'Entre em contato', p: 'Fale com nossos consultores via WhatsApp ou telefone para tirar suas dúvidas.' },
@@ -337,61 +384,34 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
                     </div>
                   </div>
                 ))}
+                <br />              
               </div>
-            </div>
-
-            <div className={styles.illustrationArea}>
-               <div className={styles.illustrationInner}>
-                 <p style={{ color: '#0D3059', fontWeight: 700, fontSize: '18px' }}>Ilustração de Atendimento</p>
-                 <p style={{ fontSize: '14px', color: '#4b5563' }}>Homem e mulher sentados conversando.</p>
-               </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className={styles.section} style={{ padding: '5rem 0', backgroundColor: '#F4F3F1' }}>
+      <section className={styles.section}>
         <div className={styles.statsWrap}>
           <div className={styles.statsGrid}>
             <div className={styles.statItem}>
-              <div className={styles.statNumber}>30+</div>
-              <div className={styles.statLabel}>Anos de História</div>
+              <div className={styles.statNumber1}>30+</div>
+              <div className={styles.statLabel1}>Anos de História</div>
             </div>
             <div className={styles.statItem}>
-              <div className={styles.statNumber}>15k<span>+</span></div>
-              <div className={styles.statLabel}>Famílias Amparadas</div>
+              <div className={styles.statNumber1}>15k+</div>
+              <div className={styles.statLabel1}>Famílias Amparadas</div>
             </div>
             <div className={styles.statItem}>
-              <div className={styles.statNumber}>24h</div>
-              <div className={styles.statLabel}>Suporte Ativo</div>
+              <div className={styles.statNumber1}>24h</div>
+              <div className={styles.statLabel1}>Suporte Ativo</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Feedbacks */}
-      <section className={styles.section} style={{ backgroundColor: '#FAF9F7' }}>
-        <div className={styles.sectionInner}>
-          <div className={styles.grid3}>
-            {[
-              { text: '"Fomos atendidos com muita agilidade. No momento da perda, a última coisa que você quer é burocracia. A Divina Luz resolveu tudo."', author: 'Maria Helena Silva' },
-              { text: '"O plano familiar deles é excelente. Meus pais estão cobertos e os descontos em medicamentos já pagam a mensalidade."', author: 'Ricardo Oliveira' },
-              { text: '"Empresa muito séria. Transparência total nos planos e o atendimento 24h funciona de verdade quando precisamos."', author: 'Ana Paula Santos' }
-            ].map((feedback, i) => (
-              <div key={i} className={styles.feedbackCard}>
-                <div className={styles.feedbackStars}>
-                  {[1,2,3,4,5].map(star => <Star key={star} />)}
-                </div>
-                <p className={styles.feedbackText}>
-                  {feedback.text}
-                </p>
-                <p className={styles.feedbackAuthor}>{feedback.author}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* FAQ */}
       <section className={styles.section} style={{ backgroundColor: '#FAF9F7', paddingTop: '2rem' }}>
@@ -400,34 +420,34 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
             Perguntas Frequentes
           </h2>
           <div className={styles.faqList}>
-            <div className={styles.faqItem}>
-              <div className={styles.faqHeader}>
-                <span>Qual a área de cobertura dos planos?</span>
-                <ChevronDown style={{ transform: 'rotate(180deg)' }} />
+            {faqData.map((faq, index) => (
+              <div 
+                key={index} 
+                className={styles.faqItem}
+                onClick={() => toggleFaq(index)}
+              >
+                <div className={styles.faqHeader}>
+                  <span>{faq.question}</span>
+                  <ChevronDown 
+                    style={{ 
+                      transform: activeFaq === index ? 'rotate(180deg)' : 'rotate(0deg)',
+                      transition: 'transform 0.3s ease'
+                    }} 
+                  />
+                </div>
+                {activeFaq === index && (
+                  <p className={styles.faqBody}>
+                    {faq.answer}
+                  </p>
+                )}
               </div>
-              <p className={styles.faqBody}>
-                Nossa assistência funeral tem cobertura em todo o território nacional. Independente de onde o associado esteja, prestamos todo o suporte necessário através da nossa rede credenciada.
-              </p>
-            </div>
-            <div className={styles.faqItem}>
-              <div className={styles.faqHeader}>
-                <span>Quantas pessoas posso incluir no plano familiar?</span>
-                <ChevronDown />
-              </div>
-            </div>
-            <div className={styles.faqItem}>
-              <div className={styles.faqHeader}>
-                <span>Como funciona o atendimento 24 horas?</span>
-                <ChevronDown />
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
       <section className={styles.ctaWrap}>
-        <div className={styles.ctaBg}></div>
         <div className={styles.section} style={{ padding: '6rem 0' }}>
           <div className={styles.ctaInner}>
             <h2 className={styles.ctaTitle}>
@@ -443,28 +463,22 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
           </div>
         </div>
       </section>
-
+            <div className="estamos" style={{backgroundColor: '#ffffffff'}}>
+      <h2 style={{ textAlign: 'center', marginBottom: '2rem', fontSize: '2rem', fontWeight: '800', color: '#002453ff' }}>Aonde estamos</h2>
+</div>
       {/* Maps */}
       <section className={styles.mapWrap}>
-        <div className={styles.mapPh}>
-          MAPA INTERATIVO
-        </div>
-        
-        <div className={styles.mapCard}>
-          <div className={styles.mapCardHeader}>
-            <MapPin /> Onde Estamos
-          </div>
-          <h4 className={styles.mapCardTitle}>Jaraguá - GO</h4>
-          <p className={styles.mapCardText}>
-            Nossa sede está localizada no coração de Jaraguá, pronta para oferecer o melhor suporte para você e sua família.
-          </p>
-          <div className={styles.mapPlantao}>
-            Plantão 24 Horas
-          </div>
-          <div className={styles.mapPhone}>
-            0800 123 4567
-          </div>
-        </div>
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30783.55617899675!2d-49.119945900000005!3d-15.325249800000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935cc21bfefee339%3A0xcfd588530c305fad!2sGrupo%20Divina%20Luz!5e0!3m2!1spt-BR!2sbr!4v1776255231919!5m2!1spt-BR!2sbr"
+          width="100%" 
+          height="100%" 
+          style={{ border: 0 }} 
+          allowFullScreen 
+          loading="lazy" 
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Localização Grupo Divina Luz"
+        ></iframe>
+    
       </section>
 
       {/* Footer */}
