@@ -430,7 +430,7 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
             {[
               { text: '"Fui muito bem acolhida na despedida do meu pai. O cuidado da equipe e a tranquilidade para resolver tudo sem pressa fizeram toda a diferença."', author: 'Jaciara' },
               { text: '"Sem palavras pelo atendimento e compromisso nesa hora difícil Vocês conseguem tornar um momento tranquilo"', author: 'Luiz' },
-              { text: '"Vocês foram excelenteS! Equipe maravilhosa, que trabalha com tanto carinho e dedicação pela a família neste momento de dor."', author: 'Eliete' }
+              { text: '"Vocês foram excelentes! Equipe maravilhosa, que trabalha com tanto carinho e dedicação pela a família neste momento de dor."', author: 'Eliete' }
             ].map((feedback, i) => (
               <div key={i} className={styles.feedbackCard}>
                 <div className={styles.feedbackStars}>
