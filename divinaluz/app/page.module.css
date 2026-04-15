@@ -462,6 +462,113 @@
   font-size: 13px;
 }
 
+.sectionFamiliaPlan {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  margin-bottom: 70px;
+  width: 90%;
+  max-width: 690px;
+}
+.textYellow {
+    background-color: #d4a017;
+    padding: 20px;
+    border-radius: 30px;
+    width: 320px;
+    margin-left: -30px;
+    position: relative;
+    z-index: 2;
+}
+
+.textYellow h2 {
+  font-size: 44px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.b {
+  color: #ffffff;
+  font-weight: 2100;
+  font-size: 44px;
+  line-height: 30px;
+}
+
+.textFamiliaDescription {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #0A2548;
+  padding: 20px;
+  border-radius: 16px;
+  margin-top: 50px;
+}
+.textFamiliaTitle h2 {
+  margin-bottom: 30px;
+}
+
+.textFamiliaDescription h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.iconSetaBaixo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+  color: #D4A336;
+}
+
+.imageFamilia {
+  width: 400px;
+  height: 400px;
+  background-image: url("/familia2.jpg");
+  background-size: cover;
+  background-position: center;
+  border-radius: 30px 0px 0px 30px;
+}
+
+@media (max-width: 768px) {
+  .textFamiliaDescription {
+    margin-top: 20px;
+    padding: 20px;
+  }
+  .sectionFamiliaPlan {
+    flex-direction: column;
+    padding: 0 1rem;
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .imageFamilia {
+    width: 100%;
+    height: 300px;
+    border-radius: 30px 30px 0 0;
+  }
+
+  .textYellow {
+    width: 100%;
+    margin-left: 0;
+    margin-top: -30px;
+    border-radius: 30px;
+    padding: 30px 20px;
+  }
+  
+  .textYellow h2 {
+    font-size: 32px;
+  }
+  
+  .b {
+    font-size: 32px;
+    line-height: 1.2;
+  }
+}
+
 /* Generic Section Styles */
 .section {
   padding: 3rem 0;
@@ -726,7 +833,10 @@
   font-size: 14px;
   cursor: pointer;
   transition: all 0.2s;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
 }
 
 .btnPlan:hover {
@@ -746,6 +856,10 @@
   cursor: pointer;
   transition: all 0.2s;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
 }
 
 .btnPlanMaster:hover {
