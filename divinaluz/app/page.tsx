@@ -47,14 +47,7 @@ export default function Home() {
         <div className={styles.headerInner}>
           {/* Logo */}
           <div className={styles.logoContainer}>
-            <div className={styles.logoText}>
-              <span className={styles.logoBrand}>
-                DIVINA<span>LUZ</span>
-              </span>
-              <span className={styles.logoSubtitle}>
-                Assistência Familiar
-              </span>
-            </div>
+            <img src="/divinaluz.png" alt="Divina Luz" className={styles.logoImage} />
           </div>
           
           {/* Desktop Nav */}
