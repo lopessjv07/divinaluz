@@ -114,10 +114,14 @@
   cursor: pointer;
 }
 
-.logoImage {
-  height: 60px;
-  width: auto;
-  object-fit: contain;
+.logoImage{
+  width: 170px;
+}
+
+@media (min-width: 568px) {
+  .logoImage{
+    width: 230px;
+  }
 }
 
 .logoText {
@@ -201,6 +205,31 @@
 }
 
 .headerCta svg {
+  width: 22px;
+  height: 22px;
+}
+
+.headerInstagramCta {
+  display: flex;
+  background-color: #0A2B57;
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-decoration: none;
+  margin-right: 8px;
+}
+
+.headerInstagramCta:hover {
+  background-color: #1A4D8F;
+}
+
+.headerInstagramCta svg {
   width: 22px;
   height: 22px;
 }
@@ -295,11 +324,12 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('/familiasol.jpg');
-  background-size: cover;
-  background-position: right center;
-  /* Deslocado totalmente para a direita */
   z-index: 0;
+}
+
+.heroImgObj {
+  object-fit: cover;
+  object-position: right center;
 }
 
 .heroBg::after {
@@ -566,6 +596,214 @@
   .b {
     font-size: 32px;
     line-height: 1.2;
+  }
+}
+
+/* Personalize Section */
+.personalizeWrap {
+  margin-top: 50px;
+  margin-bottom: 70px;
+}
+
+.personalizeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  max-width: 690px;
+  margin: 0 auto;
+}
+
+.personalizeTextCol {
+  position: relative;
+  z-index: 2;
+  margin-right: -40px; /* Pull text to overlap the image on the right */
+  width: 350px;
+}
+
+.personalizeCard {
+  background-color: #0A2548;
+  padding: 30px 25px;
+  border-radius: 30px;
+}
+
+.personalizeCard h2 {
+  font-size: 38px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.personalizeCardSeta {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background-color: #D4A336;
+  padding: 15px 25px;
+  border-radius: 20px;
+  margin-top: 15px;
+}
+
+.personalizeIcon {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: #0A2548;
+  color: #D4A336;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.personalizeCardSeta h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0A2548;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.personalizeImg {
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.personalizeImg img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .personalizeContainer {
+    flex-direction: column-reverse; /* Img on top, text below */
+    padding: 0 1rem;
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .personalizeImg {
+    width: 100%;
+    height: auto;
+  }
+
+  .personalizeTextCol {
+    width: 100%;
+    margin-right: 0;
+    margin-top: -30px;
+  }
+
+  .personalizeCard {
+    border-radius: 30px;
+    padding: 30px 20px;
+  }
+
+  .personalizeCard h2 {
+    font-size: 30px;
+  }
+}
+
+.personalizeTopicsBox {
+  background-color: #0A2548;
+  border-radius: 30px;
+  max-width: 850px;
+  width: 90%;
+  margin: -20px auto 0 auto;
+  padding: 40px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  position: relative;
+  z-index: 3;
+}
+
+.topicsGridInner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.topicCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.topicItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.topicIcon {
+  color: #EF4444; /* Red checkmark */
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  stroke-width: 3px;
+}
+
+@media (max-width: 768px) {
+  .personalizeTopicsBox {
+    padding: 30px 20px;
+    margin-top: -50px;
+    gap: 25px;
+  }
+  
+  .topicsGridInner {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .btnPulseWhatsapp {
+    width: 100%;
+    padding: 15px;
+    font-size: 14px;
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+.btnPulseWhatsapp {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #008631;
+  color: white;
+  padding: 15px 40px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+  animation: pulse-green 2s infinite;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.btnPulseWhatsapp:hover {
+  transform: scale(1.05);
+}
+
+@keyframes pulse-green {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
   }
 }
 
@@ -948,15 +1186,23 @@
 }
 
 /* Stats */
-.statItem {
-  width: 310px;
-  margin: 0px 60px 0px 0px ;
-  text-align: center;
-  align-items: center;
+.statsGrid {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 3rem;
+  max-width: 60rem;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
 }
 
-.statLabel1{
-  font-size: 20;
+.statItem {
+  text-align: center;
+  flex: 1;
+  min-width: 150px;
 }
 
 .statNumber1 {
@@ -967,51 +1213,33 @@
   margin-bottom: 8px;
 }
 
-.statsGrid {
-  display: flex;
-  width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@media (min-width: 768px) {
-  .statsGrid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 440px) {
-  .statItem {
-    width: 83px;
-    text-align: center;
-    align-items: center;
-  }
-
-  .statNumber {
-    font-size: 34px;
-    font-weight: 900;
-    color: #0D3059;
-    letter-spacing: -0.05em;
-    margin-bottom: 8px;
-  }
-}
-
-.statNumber {
-  font-size: 34px;
-  font-weight: 900;
-  color: #0D3059;
-  letter-spacing: -0.05em;
-  margin-bottom: 8px;
-}
-
-.statNumber span {
-  font-size: 50px;
-}
-
-.statLabel {
-  color: #4b5563;
+.statLabel1 {
+  font-size: 20px;
+  color: #6b7280;
   font-weight: 500;
-  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .statsGrid {
+    gap: 1rem;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+
+  .statItem {
+    min-width: auto;
+    width: 30%;
+  }
+
+  .statNumber1 {
+    font-size: 32px;
+    margin-bottom: 4px;
+  }
+
+  .statLabel1 {
+    font-size: 13px;
+    line-height: 1.2;
+  }
 }
 
 /* Feedbacks */
@@ -1130,6 +1358,10 @@
   margin: 0 auto 2.5rem auto;
 }
 
+.ctaSectionPadding {
+  padding: 6rem 1rem;
+}
+
 .ctaBtn {
   background-color: #0A6B29;
   color: #fff;
@@ -1147,6 +1379,50 @@
 
 .ctaBtn:hover {
   background-color: #075320;
+}
+
+@media (max-width: 768px) {
+  /* FAQ Adjustments */
+  .faqTitle {
+    font-size: 26px;
+    margin-bottom: 2rem;
+  }
+  
+  .faqItem {
+    padding: 1.2rem;
+  }
+  
+  .faqHeader {
+    font-size: 15px;
+  }
+  
+  .faqBody {
+    font-size: 14px;
+    padding-right: 0;
+  }
+
+  /* CTA Adjustments */
+  .ctaSectionPadding {
+    padding: 4rem 1rem;
+  }
+
+  .ctaTitle {
+    font-size: 30px;
+    text-align: left;
+  }
+  
+  .ctaText {
+    font-size: 16px;
+    margin-bottom: 2rem;
+    text-align: left;
+  }
+  
+  .ctaBtn {
+    width: 100%;
+    padding: 15px 25px;
+    font-size: 15px;
+    justify-content: center;
+  }
 }
 
 /* Map */

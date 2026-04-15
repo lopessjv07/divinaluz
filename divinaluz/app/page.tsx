@@ -1,12 +1,16 @@
 "use client";
 import React, { useState } from "react";
 import { CheckCircle2, ShieldCheck, Heart, Map, Clock, Rocket, PlusCircle, Check, Star, ChevronDown, MessageCircle, MapPin, Phone, Mail, Send, Menu, X, ArrowDown } from "lucide-react";
+import Image from "next/image";
 import styles from "./page.module.css";
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
+  
+  const WHATSAPP_LINK = "https://wa.me/5508005652000";
+  const openWhatsapp = () => window.open(WHATSAPP_LINK, "_blank");
 
   const faqData = [
     {
@@ -36,9 +40,8 @@ export default function Home() {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return <div style={{ backgroundColor: '#FAF9F7', minHeight: '100vh' }} />;
-  }
+  // No more blank screen guard for better FCP
+
 
   return (
     <div className={styles.pageContainer} suppressHydrationWarning>
@@ -47,21 +50,31 @@ export default function Home() {
         <div className={styles.headerInner}>
           {/* Logo */}
           <div className={styles.logoContainer}>
-            <img src="/divinaluz.png" alt="Divina Luz" className={styles.logoImage} />
+            <img  
+              className={styles.logoImage}
+              src="/divinaluz.png" 
+            />
           </div>
           
           {/* Desktop Nav */}
           <nav className={styles.desktopNav}>
-            {['Benefícios', 'Planos', 'Sobre Nós', 'Contato'].map((item) => (
-              <a key={item} href={`#${item.toLowerCase().replace(' ', '-')}`} className={styles.navLink}>
-                {item}
+            {[
+              { label: 'Benefícios', href: '#beneficios' },
+              { label: 'Planos', href: '#planos' },
+              { label: 'Sobre Nós', href: '#sobre-nos' }
+            ].map((item) => (
+              <a key={item.label} href={item.href} className={styles.navLink}>
+                {item.label}
               </a>
             ))}
           </nav>
 
           {/* CTA */}
           <div className={styles.ctaContainer}>
-            <button className={styles.headerCta}>
+            <a href="https://www.instagram.com/grupodivinaluz/?hl=pt-br" target="_blank" rel="noopener noreferrer" className={styles.headerInstagramCta} title="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            </a>
+            <button className={styles.headerCta} onClick={openWhatsapp}>
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
             </button>
             <div className={styles.mobileActions}>
@@ -76,14 +89,18 @@ export default function Home() {
         {menuOpen && (
           <div className={styles.mobileNavOverlay}>
             <nav className={styles.mobileNav}>
-              {['Benefícios', 'Planos', 'Sobre Nós', 'Contato'].map((item) => (
+              {[
+                { label: 'Benefícios', href: '#beneficios' },
+                { label: 'Planos', href: '#planos' },
+                { label: 'Sobre Nós', href: '#sobre-nos' }
+              ].map((item) => (
                 <a 
-                   key={item} 
-                   href={`#${item.toLowerCase().replace(' ', '-')}`} 
+                   key={item.label} 
+                   href={item.href} 
                    className={styles.mobileNavLink}
                    onClick={() => setMenuOpen(false)}
                 >
-                  {item}
+                  {item.label}
                 </a>
               ))}
             </nav>
@@ -93,7 +110,15 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className={styles.hero}>
-        <div className={styles.heroBg}></div>
+        <div className={styles.heroBg}>
+          <Image
+            src="/familiasol.jpg"
+            alt="Fundo Hero - Família"
+            fill
+            priority
+            className={styles.heroImgObj}
+          />
+        </div>
         <div className={styles.heroInner}>
           <div className={styles.heroContent}>
             {/* Badge */}
@@ -117,7 +142,7 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
 
             {/* Buttons */}
             <div className={styles.heroButtons}>
-              <button className={`${styles.btn} ${styles.btnPrimary}`}>
+              <button className={`${styles.btn} ${styles.btnPrimary}`} onClick={openWhatsapp}>
                 <svg 
                   className="w-6 h-6 mr-3" 
                   xmlns="http://www.w3.org/2000/svg" 
@@ -128,7 +153,7 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
                 </svg>
                 Falar com um consultor
               </button>
-              <button className={`${styles.btn} ${styles.btnSecondary}`}>
+              <button className={`${styles.btn} ${styles.btnSecondary}`} onClick={() => document.getElementById('planos')?.scrollIntoView({ behavior: 'smooth' })}>
                 Ver Planos e Valores
               </button>
             </div>
@@ -217,7 +242,7 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
                   </li>
                 ))}
               </ul>
-              <button className={styles.btnPlan}>
+              <button className={styles.btnPlan} onClick={openWhatsapp}>
                 <svg className="w-5 h-5 mr-2 inline-block" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
                 falar com um consultor
               </button>
@@ -247,7 +272,7 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
                   </li>
                 ))}
               </ul>
-              <button className={styles.btnPlan}>
+              <button className={styles.btnPlan} onClick={openWhatsapp}>
                 <svg className="w-5 h-5 mr-2 inline-block" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
                 falar com um consultor
               </button>
@@ -281,7 +306,7 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
                   </li>
                 ))}
               </ul>
-              <button className={styles.btnPlanMaster}>
+              <button className={styles.btnPlanMaster} onClick={openWhatsapp}>
                 <svg className="w-5 h-5 mr-2 inline-block" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
                 falar com um consultor
               </button>
@@ -313,7 +338,7 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
                   </li>
                 ))}
               </ul>
-              <button className={styles.btnPlan}>
+              <button className={styles.btnPlan} onClick={openWhatsapp}>
                 <svg className="w-5 h-5 mr-2 inline-block" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
                 falar com um consultor
               </button>
@@ -323,9 +348,84 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
         </div>
       </section>
 
+      <section className={styles.personalizeWrap}>
+        <div className={styles.personalizeContainer}>
+          <div className={styles.personalizeTextCol}>
+            <div className={styles.personalizeCard}>
+              <h2>Cuidar de quem você ama do seu jeito</h2>
+            </div>
+            <div className={styles.personalizeCardSeta}>
+              <div className={styles.personalizeIcon}>
+                <ArrowDown className="w-6 h-6" />
+              </div>
+              <h3>personalize seu plano</h3>
+            </div>
+          </div>
+          <div className={styles.personalizeImg}>
+            <Image 
+              src="/foto.png" 
+              alt="Personalize seu plano" 
+              width={400} 
+              height={400}
+              style={{ width: '100%', height: 'auto' }}
+            />
+          </div>
+        </div>
+        
+        <div className={styles.personalizeTopicsBox}>
+          <div className={styles.topicsGridInner}>
+            <div className={styles.topicCol}>
+              <div className={styles.topicItem}>
+                <Check className={styles.topicIcon} />
+                <span>Tanatopraxia</span>
+              </div>
+              <div className={styles.topicItem}>
+                <Check className={styles.topicIcon} />
+                <span>Seguro AUX com indenização a partir de R$ 5.000,00 por vida segurada</span>
+              </div>
+              <div className={styles.topicItem}>
+                <Check className={styles.topicIcon} />
+                <span>Cesta básica emergencial em caso de óbito do titular</span>
+              </div>
+              <div className={styles.topicItem}>
+                <Check className={styles.topicIcon} />
+                <span>Seguro Residencial Fácil</span>
+              </div>
+            </div>
+            <div className={styles.topicCol}>
+              <div className={styles.topicItem}>
+                <Check className={styles.topicIcon} />
+                <span>Sala de Homenagem</span>
+              </div>
+              <div className={styles.topicItem}>
+                <Check className={styles.topicIcon} />
+                <span>PET Assistência</span>
+              </div>
+              <div className={styles.topicItem}>
+                <Check className={styles.topicIcon} />
+                <span>Coroa de Flores</span>
+              </div>
+              <div className={styles.topicItem}>
+                <Check className={styles.topicIcon} />
+                <span>Cobertura nacional por dependente</span>
+              </div>
+            </div>
+          </div>
+          <button className={styles.btnPulseWhatsapp} onClick={openWhatsapp}>
+            <svg className="w-6 h-6 mr-2 inline-block" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            Quero mais informações
+          </button>
+        </div>
+      </section>
+
       {/* Feedbacks */}
       <section className={styles.section} style={{ backgroundColor: '#FAF9F7' }}>
         <div className={styles.sectionInner}>
+          <div className={styles.sectionCenter} style={{ marginBottom: '3rem' }}>
+            <h2 className={styles.sectionTitle}>
+              Depoimentos de nossos clientes
+            </h2>
+          </div>
           <div className={styles.grid3}>
             {[
               { text: '"Fui muito bem acolhida na despedida do meu pai. O cuidado da equipe e a tranquilidade para resolver tudo sem pressa fizeram toda a diferença."', author: 'Jaciara' },
@@ -437,7 +537,7 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
 
 
       {/* FAQ */}
-      <section className={styles.section} style={{ backgroundColor: '#FAF9F7', paddingTop: '2rem' }}>
+      <section className={styles.section} style={{ backgroundColor: '#FAF9F7', paddingTop: '2rem', padding: '20px' }}>
         <div className={styles.faqMax}>
           <h2 className={styles.faqTitle}>
             Perguntas Frequentes
@@ -470,8 +570,8 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
       </section>
 
       {/* CTA */}
-      <section className={styles.ctaWrap}>
-        <div className={styles.section} style={{ padding: '6rem 0' }}>
+      <section id="sobre-nos" className={styles.ctaWrap}>
+        <div className={`${styles.section} ${styles.ctaSectionPadding}`}>
           <div className={styles.ctaInner}>
             <h2 className={styles.ctaTitle}>
               Proteja quem você ama hoje mesmo
@@ -479,8 +579,8 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
             <p className={styles.ctaText}>
               Não deixe para amanhã a segurança de quem você mais valoriza. Fale com um de nossos especialistas agora.
             </p>
-            <button className={styles.ctaBtn}>
-              <MessageCircle style={{ marginRight: '12px' }} />
+            <button className={styles.ctaBtn} onClick={openWhatsapp}>
+              <svg className="w-6 h-6 mr-2 inline-block" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
               Chamar no WhatsApp
             </button>
           </div>
@@ -511,18 +611,13 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
              
              {/* Logo Col */}
              <div>
-               <div className={styles.logoText} style={{ marginBottom: '2rem' }}>
-                 <span className={styles.logoBrand}>
-                   DIVINA<span>LUZ</span>
-                 </span>
-                 <span className={styles.logoSubtitle}>
-                   Assistência Familiar
-                 </span>
-               </div>
                <p className={styles.footerText}>
                  Assistência Familiar e Amparo. Tradição e respeito cuidando da sua família há mais de três décadas.
                </p>
                <div className={styles.footerSocials}>
+                 <a href="https://www.instagram.com/grupodivinaluz/?hl=pt-br" target="_blank" rel="noopener noreferrer" className={styles.footerSocialIcon} title="Instagram" aria-label="Instagram">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                 </a>
                  <div className={styles.footerSocialIcon}><ShieldCheck /></div>
                  <div className={styles.footerSocialIcon}><Star /></div>
                </div>
@@ -546,43 +641,24 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
              <div>
                <h4 className={styles.footerTitle}>Contato</h4>
                <ul className={styles.footerContactList}>
-                 <li className={styles.footerContactItem}>
+                 <li className={styles.footerContactItem} onClick={openWhatsapp} style={{ cursor: 'pointer' }}>
                    <Phone className={styles.footerContactIcon} />
                    0800 565 2000
                  </li>
-                 <li className={styles.footerContactItem}>
-                   <Mail className={styles.footerContactIcon} />
-                   contato@divinaluz.com.br
-                 </li>
                  <li className={`${styles.footerContactItem} ${styles.itemsStart}`}>
                    <MapPin className={styles.footerContactIconTop} />
-                   Av. Central, 1000 - Centro
+                   Av. Ferreira Rios, 511 - Vila Sao Jose, Jaraguá - GO
                  </li>
                </ul>
              </div>
 
              {/* Associe-se */}
-             <div>
-               <h4 className={styles.footerTitle}>Associe-se</h4>
-               <p className={styles.footerText} style={{ marginBottom: '1.5rem' }}>
-                 Receba novidades e dicas sobre planejamento familiar.
-               </p>
-               <div className={styles.newsletterForm}>
-                 <input 
-                   type="email" 
-                   placeholder="Seu e-mail" 
-                   className={styles.newsInput}
-                 />
-                 <button className={styles.newsBtn}>
-                   <Send style={{ width: '18px', height: '18px' }} />
-                 </button>
-               </div>
-             </div>
+             
            </div>
            
            <div className={styles.footerBottom}>
              <div className={styles.footerCopy}>
-               &copy; 2024 Divina Luz. Assistência Familiar e Amparo. Todos os direitos reservados.
+               &copy; 2026 Divina Luz. Assistência Familiar e Amparo. Todos os direitos reservados.
              </div>
              <button className={styles.footerUp}>
                <ChevronDown style={{ transform: 'rotate(180deg)', width: '16px', height: '16px' }} />
