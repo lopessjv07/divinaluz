@@ -469,7 +469,7 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
       {/* Maps */}
       <section className={styles.mapWrap}>
         <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30783.55617899675!2d-49.119945900000005!3d-15.325249800000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935cc21bfefee339%3A0xcfd588530c305fad!2sGrupo%20Divina%20Luz!5e0!3m2!1spt-BR!2sbr!4v1776255231919!5m2!1spt-BR!2sbr"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3839.8989432426306!2d-49.32471128830343!3d-15.756484384815574!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935c546182a20b5b%3A0xbdff79b1d3f44338!2sAv.%20Ferreira%20Rios%2C%20511%20-%20Vila%20Sao%20Jose%2C%20Jaragu%C3%A1%20-%20GO%2C%2076330-000!5e0!3m2!1spt-BR!2sbr!4v1776257262735!5m2!1spt-BR!2sbr"
           width="100%" 
           height="100%" 
           style={{ border: 0 }} 
