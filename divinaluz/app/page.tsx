@@ -370,6 +370,7 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
               style={{ width: '100%', height: 'auto' }}
             />
           </div>
+          {/**/}
         </div>
         
         <div className={styles.personalizeTopicsBox}>
