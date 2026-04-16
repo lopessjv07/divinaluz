@@ -623,7 +623,8 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
                </div>
              </div>
 
-             {/* Links Rápidos */}
+             {/* Links Rápidos 
+             
              <div>
                <h4 className={styles.footerTitle}>Links Rápidos</h4>
                <ul className={styles.footerLinks}>
@@ -636,6 +637,9 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
                  ))}
                </ul>
              </div>
+             
+             */}
+             
 
              {/* Contato */}
              <div>
@@ -660,9 +664,6 @@ Jaraguá merece. Um atendimento humanizado que se importa de verdade, porque cad
              <div className={styles.footerCopy}>
                &copy; 2026 Divina Luz. Assistência Familiar e Amparo. Todos os direitos reservados.
              </div>
-             <button className={styles.footerUp}>
-               <ChevronDown style={{ transform: 'rotate(180deg)', width: '16px', height: '16px' }} />
-             </button>
            </div>
          </div>
       </footer>
