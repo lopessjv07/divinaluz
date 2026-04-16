@@ -8,8 +8,23 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Divina Luz - Cuidar de quem amamos",
-  description: "Proteja quem você ama hoje mesmo com os planos Divina Luz.",
+  title: "Grupo Divina Luz | Assistência Familiar em Jaraguá",
+  description: "Tradição e respeito cuidando da sua família há mais de 30 anos. Planos de assistência funeral completos, atendimento humanizado e cobertura nacional.",
+  keywords: ["Assistência Familiar", "Plano Funerário", "Funerária", "Jaraguá", "Goiás", "Grupo Divina Luz", "Atendimento 24h", "Plano POP", "Plano VIP", "Plano MASTER", "Cremação", "Coroa de Flores"],
+  openGraph: {
+    title: "Grupo Divina Luz | Assistência Familiar",
+    description: "Amparo completo para sua família. Conheça nossos planos flexíveis e garanta a proteção e o cuidado que quem você ama merece.",
+    locale: "pt_BR",
+    type: "website",
+    siteName: "Grupo Divina Luz",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  icons: {
+    icon: '/fav.png',
+  },
 };
 
 export default function RootLayout({
